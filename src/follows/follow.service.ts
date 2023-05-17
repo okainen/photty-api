@@ -20,4 +20,22 @@ export class FollowService {
   async findOne(id: string): Promise<Follow> {
     return this.followModel.findById(id);
   }
+
+  async delete(id: string): Promise<Follow> {
+    const deletedFollow = await this.followModel.findByIdAndDelete(id);
+    if (!deletedFollow) {
+      throw new Error('No Follow found with this id');
+    }
+    return deletedFollow;
+  }
+
+  async update(id: string, input: Partial<FollowInput>): Promise<Follow> {
+    const updatedFollow = await this.followModel.findByIdAndUpdate(id, input, {
+      new: true,
+    });
+    if (!updatedFollow) {
+      throw new Error('No Follow found with this id');
+    }
+    return updatedFollow;
+  }
 }

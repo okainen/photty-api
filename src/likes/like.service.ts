@@ -20,4 +20,22 @@ export class LikeService {
   async findOne(id: string): Promise<Like> {
     return this.likeModel.findById(id);
   }
+
+  async delete(id: string): Promise<Like> {
+    const deletedLike = await this.likeModel.findByIdAndDelete(id);
+    if (!deletedLike) {
+      throw new Error('No Like found with this id');
+    }
+    return deletedLike;
+  }
+
+  async update(id: string, input: Partial<LikeInput>): Promise<Like> {
+    const updatedLike = await this.likeModel.findByIdAndUpdate(id, input, {
+      new: true,
+    });
+    if (!updatedLike) {
+      throw new Error('No Like found with this id');
+    }
+    return updatedLike;
+  }
 }

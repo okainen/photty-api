@@ -20,4 +20,26 @@ export class CommentService {
   async findOne(id: string): Promise<Comment> {
     return this.commentModel.findById(id);
   }
+
+  async delete(id: string): Promise<Comment> {
+    const deletedComment = await this.commentModel.findByIdAndDelete(id);
+    if (!deletedComment) {
+      throw new Error('No Comment found with this id');
+    }
+    return deletedComment;
+  }
+
+  async update(id: string, input: Partial<CommentInput>): Promise<Comment> {
+    const updatedComment = await this.commentModel.findByIdAndUpdate(
+      id,
+      input,
+      {
+        new: true,
+      },
+    );
+    if (!updatedComment) {
+      throw new Error('No Comment found with this id');
+    }
+    return updatedComment;
+  }
 }

@@ -61,10 +61,20 @@ type Query {
 
 type Mutation {
   createUser(input: UserInput!): UserType!
+  deleteUser(id: String!): UserType!
+  updateUser(id: String!, input: PartialUserInput!): UserType!
   createPost(input: PostInput!): PostType!
+  deletePost(id: String!): PostType!
+  updatePost(id: String!, input: PartialPostInput!): PostType!
   createLike(input: LikeInput!): LikeType!
+  deleteLike(id: String!): LikeType!
+  updateLike(id: String!, input: PartialLikeInput!): LikeType!
   createFollow(input: FollowInput!): FollowType!
+  deleteFollow(id: String!): FollowType!
+  updateFollow(id: String!, input: PartialFollowInput!): FollowType!
   createComment(input: CommentInput!): CommentType!
+  deleteComment(id: String!): CommentType!
+  updateComment(id: String!, input: PartialCommentInput!): CommentType!
 }
 
 input UserInput {
@@ -73,10 +83,22 @@ input UserInput {
   password: String!
 }
 
+input PartialUserInput {
+  username: String
+  email: String
+  password: String
+}
+
 input PostInput {
   user: String!
   caption: String!
   image: String!
+}
+
+input PartialPostInput {
+  user: String
+  caption: String
+  image: String
 }
 
 input LikeInput {
@@ -84,13 +106,29 @@ input LikeInput {
   post: String!
 }
 
+input PartialLikeInput {
+  user: String
+  post: String
+}
+
 input FollowInput {
   follower: String!
   following: String!
+}
+
+input PartialFollowInput {
+  follower: String
+  following: String
 }
 
 input CommentInput {
   text: String!
   user: String!
   post: String!
+}
+
+input PartialCommentInput {
+  user: String
+  text: String
+  post: String
 }

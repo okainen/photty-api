@@ -45,4 +45,22 @@ export class UserService {
       throw new UnauthorizedException();
     }
   }
+
+  async delete(id: string): Promise<User> {
+    const deletedUser = await this.userModel.findByIdAndDelete(id);
+    if (!deletedUser) {
+      throw new Error('No User found with this id');
+    }
+    return deletedUser;
+  }
+
+  async update(id: string, input: Partial<UserInput>): Promise<User> {
+    const updatedUser = await this.userModel.findByIdAndUpdate(id, input, {
+      new: true,
+    });
+    if (!updatedUser) {
+      throw new Error('No User found with this id');
+    }
+    return updatedUser;
+  }
 }
