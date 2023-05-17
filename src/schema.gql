@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PostType {
+  id: ID!
+  user: String!
+  image: String!
+  caption: String!
+  createdAt: DateTime!
+}
+
+type LikeType {
+  id: ID!
+  user: String!
+  post: String!
+  createdAt: DateTime!
+}
+
+type FollowType {
+  id: ID!
+  follower: String!
+  following: String!
+  createdAt: DateTime!
+}
+
+type CommentType {
+  id: String!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: String!
+  post: String!
+}
+
+type Query {
+  users: [UserType!]!
+  user(id: String!): UserType!
+  post(id: String!): PostType!
+  posts: [PostType!]!
+  like(id: String!): LikeType!
+  likes: [LikeType!]!
+  follow(id: String!): FollowType!
+  follows: [FollowType!]!
+  comments: [CommentType!]!
+  comment(id: String!): CommentType!
+}
+
+type Mutation {
+  createUser(input: UserInput!): UserType!
+  createPost(input: PostInput!): PostType!
+  createLike(input: LikeInput!): LikeType!
+  createFollow(input: FollowInput!): FollowType!
+  createComment(input: CommentInput!): CommentType!
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input PostInput {
+  user: String!
+  caption: String!
+  image: String!
+}
+
+input LikeInput {
+  user: String!
+  post: String!
+}
+
+input FollowInput {
+  follower: String!
+  following: String!
+}
+
+input CommentInput {
+  text: String!
+  user: String!
+  post: String!
+}
